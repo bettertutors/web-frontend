@@ -1,0 +1,22 @@
+<ion-view view-title="Signup" name="signup-view">
+    <ion-content class="padding">
+        <form ng-submit="signup()">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="email" placeholder="Email" ng-model="data.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Institute</span>
+                    <input type="text" placeholder="Institute" ng-model="data.institute">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Tutor or student</span>
+                    <input type="radio" ng-model="data.role" value="tutor"/>
+                    <input type="radio" ng-model="data.role" value="student"/>
+                </label>
+            </div>
+            <input type="submit" class="button button-block button-calm" value="signup"/>
+        </form>
+    </ion-content>
+</ion-view>

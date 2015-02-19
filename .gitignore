@@ -1,3 +1,6 @@
+### Custom Bower install location ###
+# www/lib/
+
 ### Ionic ###
 platforms/
 plugins/

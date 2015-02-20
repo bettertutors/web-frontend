@@ -1,19 +1,20 @@
-<ion-view view-title="Signup" name="signup-view">
+<ion-view view-title="BetterTutors &mdash; teach to <small>l</small>earn" name="signup-view"
+          ng-controller="SignupCtrl as signup">
     <ion-content class="padding">
-        <form ng-submit="signup()">
+        <form ng-submit="signup.signup()">
             <div class="list list-inset">
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="email" placeholder="Email" ng-model="data.username">
+                    <!--<span class="input-label">Username</span>-->
+                    <input type="email" placeholder="Email" ng-model="signup.data.username">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Institute</span>
-                    <input type="text" placeholder="Institute" ng-model="data.institute">
+                    <!--<span class="input-label">Institute</span>-->
+                    <input type="text" placeholder="Institute" ng-model="signup.data.institute">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Tutor or student</span>
-                    <input type="radio" ng-model="data.role" value="tutor"/>
-                    <input type="radio" ng-model="data.role" value="student"/>
+                    <!--<span class="input-label">Tutor or student?</span>-->
+                    <ion-radio ng-model="signup.data.role" ng-value="'tutor'">Tutor</ion-radio>
+                    <ion-radio ng-model="signup.data.role" ng-value="'student'">Student</ion-radio>
                 </label>
             </div>
             <input type="submit" class="button button-block button-calm" value="signup"/>

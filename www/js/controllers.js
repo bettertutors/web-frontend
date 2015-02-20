@@ -1,48 +1,58 @@
-angular.module('starter.controllers', [])
+var app = angular.module('starter.controllers', []);
 
-    .controller('SignupCtrl', function ($scope, $log, LoginService, $ionicPopup, $state) {
-        $scope.data = {};
+app.controller('SignupCtrl', function ($log, $state, $ionicPopup, SignupService) {
+    $log.info('loading SignupCtrl');
+    this.data = {};
+    this.signup = function () {
+        $log.info('calling signup function with:', JSON.stringify(this.data));
+        SignupService.signupUser(this.data).success(function (data) {
+            $log.info('success');
+            $log.info(data);
+            $state.go('subscribed');
+        }).error(function (body, status, headers) {
+            /*
+            var error;
+            switch (status) {
+                case 404:
+                    error = "Server isn't up";
+                    break;
+                default:
+                    error = null;
+            }
+            */
 
-        $scope.signup = function () {
-            LoginService.loginUser($scope.data).success(function (data) {
-                $log.info('success');
-                $log.info(data);
-                $state.go('subscribed');
-            }).error(function (data) {
-                $log.error('error');
-                $log.error(data);
-                $ionicPopup.alert({
+            $ionicPopup.alert(
+                {
                     title: 'Signup failed!',
-                    template: 'Please check the values entered'
-                });
-            });
-        }
-    })
+                    template: body //error || data
+                }
+            );
+        });
+    }
+});
 
+app.controller('DashCtrl', function () {});
+app.controller('ChatsCtrl', function (Chats) {
+    this.chats = Chats.all();
+    this.remove = function (chat) {
+        Chats.remove(chat);
+    }
+});
 
-    .controller('DashCtrl', function ($scope) {})
+app.controller('ChatDetailCtrl', function ($stateParams, Chats) {
+    this.chat = Chats.get($stateParams.chatId);
+});
 
-    .controller('ChatsCtrl', function ($scope, Chats) {
-        $scope.chats = Chats.all();
-        $scope.remove = function (chat) {
-            Chats.remove(chat);
-        }
-    })
+app.controller('FriendsCtrl', function (Friends) {
+    this.friends = Friends.all();
+});
 
-    .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
-    })
+app.controller('FriendDetailCtrl', function ($stateParams, Friends) {
+    this.friend = Friends.get($stateParams.friendId);
+});
 
-    .controller('FriendsCtrl', function ($scope, Friends) {
-        $scope.friends = Friends.all();
-    })
-
-    .controller('FriendDetailCtrl', function ($scope, $stateParams, Friends) {
-        $scope.friend = Friends.get($stateParams.friendId);
-    })
-
-    .controller('AccountCtrl', function ($scope) {
-        $scope.settings = {
-            enableFriends: true
-        };
-    });
+app.controller('AccountCtrl', function () {
+    this.settings = {
+        enableFriends: true
+    };
+});

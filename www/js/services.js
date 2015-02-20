@@ -1,9 +1,9 @@
 angular.module('starter.services', [])
-    .service('LoginService', ['$http', function ($http) {
+    .service('SignupService', ['$http', function ($http) {
         return {
-            loginUser: function (payload) {
+            signupUser: function (payload) {
                 // TODO: Validate payload here (or earlier)
-                $http.post('/api/users/signup', payload);
+                return $http.post('/api/users/signup', payload);
             }
         }
     }])

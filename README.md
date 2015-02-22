@@ -32,3 +32,8 @@ Once everything is up and running, ensure you keep you browser's JavaScript cons
 Check there for any errors, if there are none and you're still stuck, start throwing around `$log.info` calls.
 
 If that still doesn't resolve your problem, start an issue on this repo.
+
+# AWS deployment
+I used the s3cmd package (pip install it), then:
+
+    s3cmd --access_key=<> --secret_key=<> sync <path>/bettertutors/web-frontend/www/ s3://<bucket_name>
